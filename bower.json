@@ -1,0 +1,16 @@
+{
+  "name": "slinky",
+  "version": "0.0.1",
+  "authors": [
+    "Maria Kousta <koustamaria@gmail.com>"
+  ],
+  "description": "Sharing links with my slack team",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.3"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.3"
+  }
+}
