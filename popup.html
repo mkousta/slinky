@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Send this to my team</title>
+    <title>Slinky</title>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
-    <div class="container">
-      <h4>Slinky</h4>
-      <textarea id="message" placeholder="Add your message..."></textarea>
-      <a id="share-with-team" href="#">Share with Team</a>
-      <p>or</p>
-      <input id="recipient" placeholder="Share with #channel, @user, group..." type="text"></input>
-      <a id="share" href="#">Share</a>
-      <p id="info-message"></p>
-    </div>
+    <header>
+      <h1>Slinky</h1>
+    </header>
+    <section>
+      <textarea id="message" placeholder="Add an optional message..."></textarea>
+    </section>
+    <section>
+      <a id="share-with-team" class="btn btn-main" href="#">Share with Team</a>
+      <p class="divider">or</p>
+      <input id="recipient" placeholder="with #channel, group..." type="text"></input>
+      <a id="share" class="btn" href="#">Share</a>
+    </section>
+    <p id="info-message"></p>
   </body>
 </html>

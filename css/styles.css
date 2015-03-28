@@ -1,0 +1,85 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 480px;
+}
+
+/* Primary Sections */
+section, header {
+  width: 100%;
+  min-height: 50px;
+  margin: 5px auto;
+}
+h1 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+/* Input Elements */
+input[type=text],
+textarea {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 80%;
+  margin: 5px 0 5px 0;
+}
+textarea {
+  width: 100%;
+}
+
+/* Links */
+a {
+  color: #4FA3DA;
+}
+a:hover {
+  color: #08588D;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background-color: #4FA3DA;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 8px 10px;
+}
+.btn:hover {
+  background-color: #08588D;
+  color: #fff;
+}
+.btn-main {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Divider */
+.divider {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.2em;
+}
+.divider:before, .divider:after {
+  content: "";
+  display: inline-block;
+  width: 46%;
+  border-bottom: 1px solid #ccc;
+  margin-right: 2%;
+}
+.divider:after {
+  margin-left: 2%;
+  margin-right: 0;
+}

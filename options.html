@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Send this to my team</title>
+    <title>Slinky options</title>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
-    <div class="container">
-      <h4>Slinky Options</h4>
-      <input id="token" placeholder="Type your token here" type="text"></input>
+    <header>
+      <h1>Slinky Options</h1>
+    </header>
+    <section>
+      <input id="token" placeholder="Type your slack token here" type="text"></input>
       <a id="check" href="#">Check</a>
-      <input id="channel" placeholder="Type your default channel here" type="text"></input>
-      <a id="save" href="#">Save</a>
-      <p id="info-message"></p>
-    </div>
+      <input id="channel" placeholder="Type your team's channel name here" type="text"></input>
+    </section>
+    <section>
+      <a id="save" class="btn" href="#">Save</a>
+    </section>
+    <p id="info-message"></p>
   </body>
 </html>
