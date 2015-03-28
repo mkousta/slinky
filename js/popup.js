@@ -1,6 +1,44 @@
 var token;
 var defaultChannel;
 var $info_el;
+var channelNames = [];
+var groupNames = [];
+
+var getChannelsList = function(){
+  return $.ajax({
+    url: 'https://slack.com/api/channels.list',
+    data: { token: token, exclude_archived: 1 }
+  });
+}
+
+var getGroupsList = function(){
+  return $.ajax({
+    url: 'https://slack.com/api/groups.list',
+    data: { token: token, exclude_archived: 1 }
+  });
+}
+
+var getAutocompleteValues = function(){
+  $.when(getChannelsList(), getGroupsList()).done(function(channelData, groupData){
+    if(channelData[0].ok){
+      for(var i=0; i<channelData[0].channels.length; i++){
+        channelNames.push('#' + channelData[0].channels[i].name);
+      }
+    }
+    else {
+      console.log('could not get channels');
+    }
+    if(groupData[0].ok){
+      for(var i=0; i<groupData[0].groups.length; i++){
+        groupNames.push(groupData[0].groups[i].name);
+      }
+    } else {
+      console.log('could not get groups');
+    }
+    $(document).trigger('gotAutompleteValues')
+  })
+
+}
 
 var sendToChannel = function(message, recipient){
   chrome.tabs.query({active: true, currentWindow: true, highlighted: true}, function(tab) {
@@ -52,6 +90,15 @@ var registerHandlers = function(){
       $info_el.html("no recipient provided");
     }
   });
+
+  $(document).on('gotAutompleteValues', function(){
+    $('#recipient').autocomplete({
+      lookup: channelNames.concat(groupNames),
+      minChars: 2,
+      appendTo: '.suggestions',
+      lookupLimit: 12
+    });
+  });
 }
 
 $(document).ready(function() {
@@ -61,5 +108,7 @@ $(document).ready(function() {
     token = data.token;
     defaultChannel = data.channel;
     registerHandlers();
+    getAutocompleteValues();
   });
+
 });

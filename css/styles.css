@@ -83,3 +83,24 @@ a:hover {
   margin-left: 2%;
   margin-right: 0;
 }
+
+/* Autocomplete */
+.suggestions {
+  position: relative;
+}
+.autocomplete-suggestions {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  margin-top: -2px;
+  background: #FFF;
+}
+.autocomplete-suggestion {
+  padding: 2px 5px;
+  white-space: nowrap;
+}
+.autocomplete-selected {
+  background: #F0F0F0;
+}
+.autocomplete-suggestions strong {
+  color: #4FA3DA;
+}
