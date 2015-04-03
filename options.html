@@ -5,6 +5,7 @@
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="js/options.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts/style.css">
   </head>
   <body>
     <header>
@@ -12,12 +13,13 @@
     </header>
     <section>
       <input id="token" placeholder="Type your slack token here" type="text"></input>
-      <a id="check" href="#">Check</a>
+      <a id="check" class="btn btn-inverted" href="#">Check<i class="icon icon-check"></i></a>
       <input id="channel" placeholder="Type your team's channel name here e.g. #example" type="text"></input>
     </section>
     <section>
-      <a id="save" class="btn" href="#">Save</a> <a id="clear" href="#">Clear</a>
+      <a id="save" class="btn" href="#">Save<i class="icon icon-check"></i></a>
+      <a id="clear" class="btn btn-inverted" href="#">Clear</a>
+      <p id="info-message"><i class="icon icon-exclamation-circle"></i><span></span></p>
     </section>
-    <p id="info-message"></p>
   </body>
 </html>

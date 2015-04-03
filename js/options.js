@@ -1,4 +1,3 @@
-var $info_el;
 
 var getOptions = function(){
   chrome.storage.local.get(function(data){
@@ -18,41 +17,31 @@ var clearOptions = function(){
   });
 }
 
-var saveOptions = function(token, channel){
+var saveOptions = function(token, channel, $success_el){
   chrome.storage.local.set({
     'token': token,
     'channel': channel
   }, function(data){
-    $info_el.html('ok');
+    $success_el.fadeIn();
   });
 }
 
 var checkToken = function(token) {
-  $.ajax({
+  return $.ajax({
     type: 'GET',
     url: 'https://slack.com/api/auth.test',
-    data: { token: token },
-    success: function(resp, status) {
-      if(resp.ok){
-       $info_el.html("token ok");
-      } else {
-       $info_el.html(resp.error);
-      }
-    },
-    error: function(resp) {
-      $info_el.html("network error");
-    }
+    data: { token: token }
   });
 }
 
 $(document).ready(function(){
-  $info_el = $("#info-message");
+  var $info_el = $("#info-message");
 
   getOptions();
 
   $("#save").click(function(e){
     e.preventDefault();
-    saveOptions($("#token").val(), $("#channel").val());
+    saveOptions($("#token").val(), $("#channel").val(), $(this).find('.icon'));
   });
 
   $("#clear").click(function(e){
@@ -62,6 +51,24 @@ $(document).ready(function(){
 
   $("#check").click(function(e){
     e.preventDefault();
-    checkToken($("#token").val());
+    $success_el = $(this).find('.icon');
+
+    checkToken($("#token").val()).then(function(resp){
+      if(resp.ok){
+        $success_el.fadeIn()
+      }
+      else{
+        $info_el.find('.icon').show()
+        $info_el.find('span').text(resp.error.replace(/_/g, ' '));
+      }
+    }).fail(function(){
+      $info_el.find('span').text('network error');
+    });
   });
+
+  $('input').on('keyup', function(){
+    $('.icon').hide();
+    $('span').text('');
+  })
+
 });

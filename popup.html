@@ -6,22 +6,26 @@
     <script type="text/javascript" src="bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts/style.css">
   </head>
   <body>
     <header>
-      <h1>Slinky</h1>
+      <h1>Slinky
+        <a class="icon icon-cog" title="options" target="_blank"></a>
+      </h1>
     </header>
     <section>
       <textarea id="message" placeholder="Add an optional message..."></textarea>
     </section>
     <section>
-      <a id="share-with-team" class="btn btn-main" href="#">Share with Team</a>
+      <a id="share-with-team" class="btn btn-main" href="#">Share with Team <i class="icon icon-check"></i> </a>
+      <p id="team-info-message"><i class="icon icon-exclamation-circle"></i><span></span></p>
       <p class="divider">or</p>
       <input id="recipient" placeholder="with #channel, group..." type="text"></input>
-      <a id="share" class="btn" href="#">Share</a>
+      <a id="share" class="btn" href="#">Share<i class="icon icon-check"></i></a>
       <div class="suggestions">
       </div>
+      <p id="info-message"><i class="icon icon-exclamation-circle"></i><span></span></p>
     </section>
-    <p id="info-message"></p>
   </body>
 </html>

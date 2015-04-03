@@ -8,6 +8,7 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   width: 480px;
+  font-size: 16px;
 }
 
 /* Primary Sections */
@@ -27,11 +28,11 @@ input[type=text],
 textarea {
   display: inline-block;
   border: 1px solid #ccc;
-  padding: 8px 10px;
+  padding: 8px 8px;
   border-radius: 3px;
-  font-size: 14px;
   width: 80%;
   margin: 5px 0 5px 0;
+  font-size: 15px;
 }
 textarea {
   width: 100%;
@@ -54,7 +55,7 @@ a:hover {
   text-decoration: none;
   font-weight: bold;
   border-radius: 3px;
-  padding: 8px 10px;
+  padding: 6px 8px;
 }
 .btn:hover {
   background-color: #08588D;
@@ -63,6 +64,18 @@ a:hover {
 .btn-main {
   display: block;
   margin-top: 10px;
+}
+.btn-inverted {
+  background-color: #fff;
+  color: #4FA3DA;
+  padding: 5px 7px;
+  border: 1px solid #fff;
+}
+.btn-inverted:hover {
+  background-color: #fff;
+  color: #4FA3DA;
+  padding: 5px 7px;
+  border: 1px solid #4FA3DA;
 }
 
 /* Divider */
@@ -103,4 +116,51 @@ a:hover {
 }
 .autocomplete-suggestions strong {
   color: #4FA3DA;
+}
+
+/* Icons */
+@font-face {
+  font-family: 'slinky-icons';
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,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) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon {
+  font-family: 'slinky-icons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-decoration: none;
+  line-height: 1;
+}
+.icon-check:before {
+  content: "\f00c";
+}
+.icon-cog:before {
+  content: "\f013";
+}
+.icon-gear:before {
+  content: "\f013";
+}
+.icon-question-circle:before {
+  content: "\f059";
+}
+.icon-exclamation-circle:before {
+  content: "\f06a";
+}
+.icon-cog {
+  color: black;
+  float: right;
+  font-size: 18px;
+}
+.icon-check, .icon-exclamation-circle {
+  display: none;
+}
+.icon-check {
+  padding-left: 6px;
+}
+.icon-exclamation-circle {
+  padding-right: 6px;
 }

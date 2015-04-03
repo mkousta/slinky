@@ -1,6 +1,5 @@
 var token;
 var defaultChannel;
-var $info_el;
 var channelNames = [];
 var groupNames = [];
 
@@ -40,7 +39,7 @@ var getAutocompleteValues = function(){
 
 }
 
-var sendToChannel = function(message, recipient){
+var sendToChannel = function(message, recipient, $success_el, $info_el){
   chrome.tabs.query({active: true, currentWindow: true, highlighted: true}, function(tab) {
     var url = tab[0].url;
 
@@ -57,13 +56,15 @@ var sendToChannel = function(message, recipient){
       data: data,
       success: function(resp, status) {
         if(resp.ok){
-         $info_el.html("sent");
+         $success_el.fadeIn();
         } else {
-         $info_el.html(resp.error);
+          $info_el.find('.icon').show();
+          $info_el.find('span').text(resp.error.replace(/_/g, ' '));
         }
       },
       error: function(resp) {
-        $info_el.html("network error");
+        $info_el.find('.icon').show();
+        $info_el.find('span').text('network error');
       }
     });
   });
@@ -74,9 +75,14 @@ var registerHandlers = function(){
   $('#share-with-team').click(function(e){
     e.preventDefault();
     if(defaultChannel){
-      sendToChannel($("#message").val(), defaultChannel);
+      sendToChannel($("#message").val(),
+        defaultChannel,
+        $(this).find('.icon'),
+        $('#team-info-message')
+      );
     } else {
-      $info_el.html('no default channel');
+      $('#team-info-message').find('.icon').show();
+      $('#team-info-message').find('span').text("set your team's channel");
     }
   });
 
@@ -84,12 +90,21 @@ var registerHandlers = function(){
     e.preventDefault();
     var recipient = $("#recipient").val();
     if(recipient.length > 0){
-      sendToChannel($("#message").val(), recipient)
+      sendToChannel($("#message").val(),
+        recipient,
+        $(this).find('.icon'),
+        $('#info-message')
+      );
     }
     else {
-      $info_el.html("no recipient provided");
+      $('#recipient').focus();
     }
   });
+
+  $('input').on('keyup', function(){
+    $('.icon').hide();
+    $('span').text('');
+  })
 
   $(document).on('gotAutompleteValues', function(){
     $('#recipient').autocomplete({
@@ -102,7 +117,8 @@ var registerHandlers = function(){
 }
 
 $(document).ready(function() {
-  $info_el = $("#info-message");
+
+  $('header').find('a').attr('href', chrome.extension.getURL('options.html'));
 
   chrome.storage.local.get(['token','channel'], function(data){
     token = data.token;
