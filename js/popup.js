@@ -118,13 +118,20 @@ var registerHandlers = function(){
 
 $(document).ready(function() {
 
-  $('header').find('a').attr('href', chrome.extension.getURL('options.html'));
+  $('.js-options').each(function(){
+    $(this).attr('href', chrome.extension.getURL('options.html'));
+  });
 
   chrome.storage.local.get(['token','channel'], function(data){
     token = data.token;
     defaultChannel = data.channel;
-    registerHandlers();
-    getAutocompleteValues();
+    if(token!==undefined && token!==''){
+      registerHandlers();
+      getAutocompleteValues();
+    } else {
+      $('section').not('#first-time').hide();
+      $('#first-time').show();
+    }
   });
 
 });
