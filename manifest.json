@@ -12,6 +12,16 @@
   "permissions": [
     "https://slack.com/*",
     "activeTab",
-    "storage"
-  ]
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["js/background.js"]
+  },
+  "icons": {
+    "16": "icons/slinky16.png",
+    "48": "icons/slinky48.png",
+    "128": "icons/slinky.png"
+  }
 }
