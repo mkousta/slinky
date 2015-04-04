@@ -67,8 +67,13 @@ $(document).ready(function(){
   });
 
   $('input').on('keyup', function(){
-    $('.icon').hide();
+    $('.icon-exclamation-circle, .icon-check').hide();
     $('span').text('');
   })
+
+  $('#help').click(function(e){
+    e.preventDefault();
+    $('#help-contents').toggle();
+  });
 
 });

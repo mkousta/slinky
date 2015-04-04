@@ -12,7 +12,7 @@ body {
 }
 
 /* Primary Sections */
-section, header {
+section, header, footer {
   width: 100%;
   min-height: 50px;
   margin: 5px auto;
@@ -21,6 +21,10 @@ h1 {
   font-size: 26px;
   text-align: center;
   margin-bottom: 0;
+}
+footer ul {
+  width: 80%;
+  display: none;
 }
 
 /* Input Elements */
@@ -158,9 +162,14 @@ a:hover {
 .icon-check, .icon-exclamation-circle {
   display: none;
 }
-.icon-check {
+.icon-check, .icon-question-circle {
   padding-left: 6px;
 }
 .icon-exclamation-circle {
   padding-right: 6px;
+}
+
+#help {
+  text-decoration: none;
+  color: #000;
 }
