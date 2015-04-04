@@ -4,7 +4,7 @@
   "authors": [
     "Maria Kousta <koustamaria@gmail.com>"
   ],
-  "description": "Sharing links with my slack team",
+  "description": "Share browsing with your Slack team",
   "license": "MIT",
   "private": true,
   "dependencies": {
