@@ -35,25 +35,25 @@ var checkToken = function(token) {
 };
 
 $(document).ready(function(){
-  var $info_el = $("#info-message");
+  var $info_el = $('#info-message');
 
   getOptions();
 
-  $("#save").click(function(e){
+  $('#save').click(function(e){
     e.preventDefault();
-    saveOptions($("#token").val(), $("#channel").val(), $(this).find('.icon'));
+    saveOptions($('#token').val(), $('#channel').val(), $(this).find('.icon'));
   });
 
-  $("#clear").click(function(e){
+  $('#clear').click(function(e){
     e.preventDefault();
     clearOptions();
   });
 
-  $("#check").click(function(e){
+  $('#check').click(function(e){
     e.preventDefault();
     $success_el = $(this).find('.icon');
 
-    checkToken($("#token").val()).then(function(resp){
+    checkToken($('#token').val()).then(function(resp){
       if(resp.ok){
         $success_el.fadeIn();
       }

@@ -45,7 +45,7 @@ var sendToChannel = function(message, recipient, $success_el, $info_el){
     var data = {
       token: token,
       channel: recipient,
-      text: message ? message + " " + url : url,
+      text: message ? message + ' ' + url : url,
       as_user: true
     };
 
@@ -74,22 +74,22 @@ var registerHandlers = function(){
   $('#share-with-team').click(function(e){
     e.preventDefault();
     if(defaultChannel){
-      sendToChannel($("#message").val(),
+      sendToChannel($('#message').val(),
         defaultChannel,
         $(this).find('.icon'),
         $('#team-info-message')
       );
     } else {
       $('#team-info-message').find('.icon').show();
-      $('#team-info-message').find('span').text("set your team's channel");
+      $('#team-info-message').find('span').text('set your team\'s channel');
     }
   });
 
   $('#share').click(function(e){
     e.preventDefault();
-    var recipient = $("#recipient").val();
+    var recipient = $('#recipient').val();
     if(recipient.length > 0){
-      sendToChannel($("#message").val(),
+      sendToChannel($('#message').val(),
         recipient,
         $(this).find('.icon'),
         $('#info-message')

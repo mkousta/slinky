@@ -7,17 +7,17 @@ var sendToTeam = function(message){
       as_user: true
     };
 
-    var strData = "";
+    var strData = '';
     for (var key in data) {
-      if (strData != "") {
-        strData += "&";
+      if (strData != '') {
+        strData += '&';
       }
-      strData += key + "=" + encodeURIComponent(data[key]);
+      strData += key + '=' + encodeURIComponent(data[key]);
     }
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://slack.com/api/chat.postMessage', true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
         console.log(xhr.responseText);
