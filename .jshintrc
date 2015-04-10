@@ -1,0 +1,17 @@
+{
+  "boss": true,
+  "browser": true,
+  "curly": true,
+  "debug": true,
+  "devel": true,
+  "globals": {
+    "chrome": false,
+    "$": false,
+    "jQuery": false
+  },
+  "latedef": true,
+  "strict": false,
+  "undef": true,
+  "unused": true,
+  "quotmark": "single"
+}
