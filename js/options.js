@@ -2,20 +2,20 @@
 var getOptions = function(){
   chrome.storage.local.get(function(data){
     if(data.token){
-      $('#token').val(data.token)
+      $('#token').val(data.token);
     }
     if(data.channel){
-      $('#channel').val(data.channel)
+      $('#channel').val(data.channel);
     }
   });
-}
+};
 
 var clearOptions = function(){
   chrome.storage.local.clear(function(data){
-    $('#token').val('')
-    $('#channel').val('')
+    $('#token').val('');
+    $('#channel').val('');
   });
-}
+};
 
 var saveOptions = function(token, channel, $success_el){
   chrome.storage.local.set({
@@ -24,7 +24,7 @@ var saveOptions = function(token, channel, $success_el){
   }, function(data){
     $success_el.fadeIn();
   });
-}
+};
 
 var checkToken = function(token) {
   return $.ajax({
@@ -32,7 +32,7 @@ var checkToken = function(token) {
     url: 'https://slack.com/api/auth.test',
     data: { token: token }
   });
-}
+};
 
 $(document).ready(function(){
   var $info_el = $("#info-message");
@@ -55,10 +55,10 @@ $(document).ready(function(){
 
     checkToken($("#token").val()).then(function(resp){
       if(resp.ok){
-        $success_el.fadeIn()
+        $success_el.fadeIn();
       }
       else{
-        $info_el.find('.icon').show()
+        $info_el.find('.icon').show();
         $info_el.find('span').text(resp.error.replace(/_/g, ' '));
       }
     }).fail(function(){
@@ -69,7 +69,7 @@ $(document).ready(function(){
   $('input').on('keyup', function(){
     $('.icon-exclamation-circle, .icon-check').hide();
     $('span').text('');
-  })
+  });
 
   $('#help').click(function(e){
     e.preventDefault();

@@ -5,7 +5,7 @@ var sendToTeam = function(message){
       channel: options.channel,
       text: message,
       as_user: true
-    }
+    };
 
     var strData = "";
     for (var key in data) {
@@ -22,10 +22,10 @@ var sendToTeam = function(message){
       if (xhr.readyState == 4) {
         console.log(xhr.responseText);
       }
-    }
+    };
     xhr.send(strData);
   });
-}
+};
 
 var onClickHandler = function(info){
   if(info.menuItemId === 'slwt'){
@@ -35,7 +35,7 @@ var onClickHandler = function(info){
   } else if(info.menuItemId === 'stwt'){
     sendToTeam(info.selectionText);
   }
-}
+};
 
 chrome.runtime.onInstalled.addListener(function(){
   chrome.contextMenus.create({

@@ -8,14 +8,14 @@ var getChannelsList = function(){
     url: 'https://slack.com/api/channels.list',
     data: { token: token, exclude_archived: 1 }
   });
-}
+};
 
 var getGroupsList = function(){
   return $.ajax({
     url: 'https://slack.com/api/groups.list',
     data: { token: token, exclude_archived: 1 }
   });
-}
+};
 
 var getAutocompleteValues = function(){
   $.when(getChannelsList(), getGroupsList()).done(function(channelData, groupData){
@@ -34,10 +34,9 @@ var getAutocompleteValues = function(){
     } else {
       console.log('could not get groups');
     }
-    $(document).trigger('gotAutompleteValues')
-  })
-
-}
+    $(document).trigger('gotAutompleteValues');
+  });
+};
 
 var sendToChannel = function(message, recipient, $success_el, $info_el){
   chrome.tabs.query({active: true, currentWindow: true, highlighted: true}, function(tab) {
@@ -48,7 +47,7 @@ var sendToChannel = function(message, recipient, $success_el, $info_el){
       channel: recipient,
       text: message ? message + " " + url : url,
       as_user: true
-    }
+    };
 
     $.ajax({
       type: 'POST',
@@ -68,7 +67,7 @@ var sendToChannel = function(message, recipient, $success_el, $info_el){
       }
     });
   });
-}
+};
 
 var registerHandlers = function(){
 
@@ -104,7 +103,7 @@ var registerHandlers = function(){
   $('input').on('keyup', function(){
     $('.icon').hide();
     $('span').text('');
-  })
+  });
 
   $(document).on('gotAutompleteValues', function(){
     $('#recipient').autocomplete({
@@ -114,7 +113,7 @@ var registerHandlers = function(){
       lookupLimit: 12
     });
   });
-}
+};
 
 $(document).ready(function() {
 
