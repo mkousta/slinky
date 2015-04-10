@@ -126,9 +126,19 @@
       }
     });
 
-    $('input').on('keyup', function(){
-      $('.icon').hide();
-      $('span').text('');
+    $recipient_input_el.on('keyup', function(){
+      $info_el.find('.icon').hide();
+      $info_el.find('span').text('');
+      $('#share').find('.icon').hide();
+    });
+
+    $message_input_el.on('keyup', function(){
+      $info_el.find('.icon').hide();
+      $info_el.find('span').text('');
+      $team_info_el.find('.icon').hide();
+      $team_info_el.find('span').text('');
+      $('#share').find('.icon').hide();
+      $('#share-with-team').find('.icon').hide();
     });
 
     $(document).on('gotAutompleteValues', function(){
