@@ -29,21 +29,20 @@
           channelNames.push('#' + channelData[0].channels[i].name);
         }
       }
-      else {
-        console.log('could not get channels');
-      }
+
       if(groupData[0].ok){
         for(i=0; i<groupData[0].groups.length; i++){
           groupNames.push(groupData[0].groups[i].name);
         }
-      } else {
-        console.log('could not get groups');
       }
+
       $(document).trigger('gotAutompleteValues');
     });
   };
 
-  var sendToChannel = function(message, recipient, $success_el, $info_el){
+  var postMessage = function(message, recipient){
+    var dfd = $.Deferred();
+
     chrome.tabs.query({active: true, currentWindow: true, highlighted: true}, function(tab) {
       var url = tab[0].url;
 
@@ -59,49 +58,71 @@
         url: 'https://slack.com/api/chat.postMessage',
         data: data,
         success: function(resp) {
-          if(resp.ok){
-           $success_el.fadeIn();
-          } else {
-            $info_el.find('.icon').show();
-            $info_el.find('span').text(resp.error.replace(/_/g, ' '));
-          }
+          dfd.resolve(resp);
         },
         error: function() {
-          $info_el.find('.icon').show();
-          $info_el.find('span').text('network error');
+          dfd.reject();
         }
       });
     });
+    return dfd;
+  };
+
+  var showInfoMessage = function($el, message){
+    $el.find('.icon').show();
+    $el.find('span').text(message);
   };
 
   var registerHandlers = function(){
 
+    var $message_input_el = $('#message');
+    var $recipient_input_el = $('#recipient');
+    var $team_info_el = $('#team-info-message');
+    var $info_el = $('#info-message');
+
     $('#share-with-team').click(function(e){
       e.preventDefault();
+
+      var $success_el = $(this).find('.icon');
+
       if(defaultChannel){
-        sendToChannel($('#message').val(),
-          defaultChannel,
-          $(this).find('.icon'),
-          $('#team-info-message')
-        );
+        postMessage($message_input_el.val(), defaultChannel)
+          .done(function(resp){
+            if(resp.ok){
+              $success_el.fadeIn();
+            } else {
+              showInfoMessage($team_info_el, resp.error.replace(/_/g, ' '));
+            }
+          })
+          .fail(function(){
+            showInfoMessage($team_info_el, 'network error');
+          });
       } else {
-        $('#team-info-message').find('.icon').show();
-        $('#team-info-message').find('span').text('set your team\'s channel');
+        showInfoMessage($team_info_el, 'set your team\'s channel');
       }
     });
 
     $('#share').click(function(e){
       e.preventDefault();
-      var recipient = $('#recipient').val();
+
+      var $success_el = $(this).find('.icon');
+      var recipient = $recipient_input_el.val();
+
       if(recipient.length > 0){
-        sendToChannel($('#message').val(),
-          recipient,
-          $(this).find('.icon'),
-          $('#info-message')
-        );
+        postMessage($message_input_el.val(), recipient)
+          .done(function(resp){
+            if(resp.ok){
+              $success_el.fadeIn();
+            } else {
+              showInfoMessage($info_el, resp.error.replace(/_/g, ' '));
+            }
+          })
+          .fail(function(){
+            showInfoMessage($info_el, 'network error');
+          });
       }
       else {
-        $('#recipient').focus();
+        $recipient_input_el.focus();
       }
     });
 
@@ -111,7 +132,7 @@
     });
 
     $(document).on('gotAutompleteValues', function(){
-      $('#recipient').autocomplete({
+      $recipient_input_el.autocomplete({
         lookup: channelNames.concat(groupNames),
         minChars: 2,
         appendTo: '.suggestions',
@@ -120,19 +141,26 @@
     });
   };
 
-  $(document).ready(function() {
-
+  var updateUrlsOfOptionsLinks = function(){
     $('.js-options').each(function(){
       $(this).attr('href', chrome.extension.getURL('options.html'));
     });
+  };
+
+  $(document).ready(function() {
+
+    updateUrlsOfOptionsLinks();
 
     chrome.storage.local.get(['token','channel'], function(data){
       token = data.token;
       defaultChannel = data.channel;
+
       if(token!==undefined && token!==''){
+        //Normal Flow
         registerHandlers();
         getAutocompleteValues();
       } else {
+        //First Time Flow
         $('section').not('#first-time').hide();
         $('#first-time').show();
       }
