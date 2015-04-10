@@ -19,8 +19,9 @@ var getGroupsList = function(){
 
 var getAutocompleteValues = function(){
   $.when(getChannelsList(), getGroupsList()).done(function(channelData, groupData){
+    var i;
     if(channelData[0].ok){
-      for(var i=0; i<channelData[0].channels.length; i++){
+      for(i=0; i<channelData[0].channels.length; i++){
         channelNames.push('#' + channelData[0].channels[i].name);
       }
     }
@@ -28,7 +29,7 @@ var getAutocompleteValues = function(){
       console.log('could not get channels');
     }
     if(groupData[0].ok){
-      for(var i=0; i<groupData[0].groups.length; i++){
+      for(i=0; i<groupData[0].groups.length; i++){
         groupNames.push(groupData[0].groups[i].name);
       }
     } else {
@@ -53,7 +54,7 @@ var sendToChannel = function(message, recipient, $success_el, $info_el){
       type: 'POST',
       url: 'https://slack.com/api/chat.postMessage',
       data: data,
-      success: function(resp, status) {
+      success: function(resp) {
         if(resp.ok){
          $success_el.fadeIn();
         } else {
@@ -61,7 +62,7 @@ var sendToChannel = function(message, recipient, $success_el, $info_el){
           $info_el.find('span').text(resp.error.replace(/_/g, ' '));
         }
       },
-      error: function(resp) {
+      error: function() {
         $info_el.find('.icon').show();
         $info_el.find('span').text('network error');
       }

@@ -11,7 +11,7 @@ var getOptions = function(){
 };
 
 var clearOptions = function(){
-  chrome.storage.local.clear(function(data){
+  chrome.storage.local.clear(function(){
     $('#token').val('');
     $('#channel').val('');
   });
@@ -21,7 +21,7 @@ var saveOptions = function(token, channel, $success_el){
   chrome.storage.local.set({
     'token': token,
     'channel': channel
-  }, function(data){
+  }, function(){
     $success_el.fadeIn();
   });
 };
@@ -51,7 +51,7 @@ $(document).ready(function(){
 
   $('#check').click(function(e){
     e.preventDefault();
-    $success_el = $(this).find('.icon');
+    var $success_el = $(this).find('.icon');
 
     checkToken($('#token').val()).then(function(resp){
       if(resp.ok){

@@ -9,7 +9,7 @@ var sendToTeam = function(message){
 
     var strData = '';
     for (var key in data) {
-      if (strData != '') {
+      if (strData !== '') {
         strData += '&';
       }
       strData += key + '=' + encodeURIComponent(data[key]);
