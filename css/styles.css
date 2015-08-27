@@ -36,7 +36,6 @@ textarea {
   border-radius: 3px;
   width: 80%;
   margin: 5px 0 5px 0;
-  font-size: 15px;
 }
 textarea {
   width: 100%;
@@ -59,7 +58,7 @@ a:hover {
   text-decoration: none;
   font-weight: bold;
   border-radius: 3px;
-  padding: 6px 8px;
+  padding: 8px 8px;
 }
 .btn:hover {
   background-color: #08588D;
@@ -72,13 +71,13 @@ a:hover {
 .btn-inverted {
   background-color: #fff;
   color: #4FA3DA;
-  padding: 5px 7px;
+  padding: 8px 8px;
   border: 1px solid #fff;
 }
 .btn-inverted:hover {
   background-color: #fff;
   color: #4FA3DA;
-  padding: 5px 7px;
+  padding: 8px 8px;
   border: 1px solid #4FA3DA;
 }
 
