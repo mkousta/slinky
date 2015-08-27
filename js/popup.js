@@ -6,6 +6,8 @@
   var defaultChannel;
   var channelNames = [];
   var groupNames = [];
+  var userNames = [];
+  var userIds = [];
 
   var getChannelsList = function(){
     return $.ajax({
@@ -21,8 +23,15 @@
     });
   };
 
+  var getUsersList = function(){
+    return $.ajax({
+      url: 'https://slack.com/api/users.list',
+      data: { token: token }
+    });
+  };
+
   var getAutocompleteValues = function(){
-    $.when(getChannelsList(), getGroupsList()).done(function(channelData, groupData){
+    $.when(getChannelsList(), getGroupsList(), getUsersList()).done(function(channelData, groupData, userData){
       var i;
       if(channelData[0].ok){
         for(i=0; i<channelData[0].channels.length; i++){
@@ -36,6 +45,12 @@
         }
       }
 
+      if(userData[0].ok){
+        for(i=0; i<userData[0].members.length; i++){
+          userNames.push(userData[0].members[i].name);
+          userIds.push(userData[0].members[i].id);
+        }
+      }
       $(document).trigger('gotAutompleteValues');
     });
   };
@@ -66,6 +81,35 @@
       });
     });
     return dfd;
+  };
+
+  var openImAndPost = function(message, recipient){
+    var dfd = $.Deferred();
+    var indexOfUser = userNames.indexOf(recipient);
+
+    if(indexOfUser > -1) {
+      $.ajax({
+        type: 'POST',
+        url: 'https://slack.com/api/im.open',
+        data: { token: token, user: userIds[indexOfUser] },
+        success: function(resp) {
+          dfd.resolve(resp);
+        },
+        error: function() {
+          dfd.reject();
+        }
+      });
+
+      dfd.done(function(resp){
+        if(resp.ok){
+          return postMessage(message, resp.channel.id);
+        }
+      });
+      return dfd;
+    }
+    else {
+      return postMessage(message, recipient);
+    }
   };
 
   var showInfoMessage = function($el, message){
@@ -109,7 +153,7 @@
       var recipient = $recipient_input_el.val();
 
       if(recipient.length > 0){
-        postMessage($message_input_el.val(), recipient)
+        openImAndPost($message_input_el.val(), recipient)
           .done(function(resp){
             if(resp.ok){
               $success_el.fadeIn();
@@ -143,10 +187,10 @@
 
     $(document).on('gotAutompleteValues', function(){
       $recipient_input_el.autocomplete({
-        lookup: channelNames.concat(groupNames),
+        lookup: channelNames.concat(groupNames).concat(userNames),
         minChars: 2,
         appendTo: '.suggestions',
-        lookupLimit: 12
+        lookupLimit: 11
       });
     });
   };
