@@ -38,6 +38,8 @@
       sendToTeam(info.pageUrl);
     } else if(info.menuItemId === 'stwt'){
       sendToTeam(info.selectionText);
+    } else if(info.menuItemId === 'siwt' && info.mediaType === "image"){
+      sendToTeam(info.srcUrl);
     }
   };
 
@@ -58,6 +60,12 @@
       title: 'Share text with team',
       id:'stwt',
       contexts: ['selection']
+    });
+
+    chrome.contextMenus.create({
+      title: 'Share image with team',
+      id:'siwt',
+      contexts: ['image']
     });
   });
 
