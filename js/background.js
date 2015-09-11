@@ -25,6 +25,7 @@
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
           console.log(xhr.responseText);
+          alert('Successfully shared with ' + options.channel + '!');
         }
       };
       xhr.send(strData);
