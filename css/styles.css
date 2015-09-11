@@ -43,16 +43,16 @@ textarea {
 
 /* Links */
 a {
-  color: #4FA3DA;
+  color: #2ab27b;
 }
 a:hover {
-  color: #08588D;
+  color: #42996d;
 }
 
 /* Buttons */
 .btn {
   display: inline-block;
-  background-color: #4FA3DA;
+  background-color: #2ab27b;
   color: #fff;
   text-align: center;
   text-decoration: none;
@@ -61,7 +61,7 @@ a:hover {
   padding: 8px 8px;
 }
 .btn:hover {
-  background-color: #08588D;
+  background-color: #42996d;
   color: #fff;
 }
 .btn-main {
@@ -70,15 +70,15 @@ a:hover {
 }
 .btn-inverted {
   background-color: #fff;
-  color: #4FA3DA;
+  color: #2ab27b;
   padding: 8px 8px;
   border: 1px solid #fff;
 }
 .btn-inverted:hover {
   background-color: #fff;
-  color: #4FA3DA;
+  color: #2ab27b;
   padding: 8px 8px;
-  border: 1px solid #4FA3DA;
+  border: 1px solid #2ab27b;
 }
 
 /* Divider */
@@ -118,7 +118,7 @@ a:hover {
   background: #F0F0F0;
 }
 .autocomplete-suggestions strong {
-  color: #4FA3DA;
+  color: #2ab27b;
 }
 
 /* Icons */
