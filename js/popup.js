@@ -213,6 +213,7 @@
         //Normal Flow
         registerHandlers();
         getAutocompleteValues();
+        $('#message').focus();
       } else {
         //First Time Flow
         $('section').not('#first-time').hide();

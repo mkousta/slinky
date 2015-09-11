@@ -19,6 +19,16 @@
     "persistent": false,
     "scripts": ["js/background.js"]
   },
+ "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
+      }
+    }
+  },
   "icons": {
     "16": "icons/slinky16.png",
     "48": "icons/slinky48.png",
