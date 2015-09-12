@@ -1,4 +1,4 @@
-# Slinky [beta]
+# ![alt text](https://github.com/mkousta/slinky/blob/master/icons/slnk48.png) Slinky [beta]
 Slinky is a simple Google Chrome extension for the popular [Slack](https://slack.com/) application.
 With Slinky you can share with your Slack team links, images, text as you browse.
 
@@ -22,3 +22,12 @@ With Slinky you can share with your Slack team links, images, text as you browse
 
 * First launch will prompt you to add a Slack token in your options for authentication. You can find a token [here](https://api.slack.com/web#authentication)).
 * Then you can share stuff by opening the extention popup or using the extention menu with a right click (this requires having set a default channel in your options).
+
+
+## License
+
+Copyright (c) 2015 Maria Kousta, MIT Licence.
+See [LICENSE](https://github.com/mkousta/slinky/blob/master/LICENSE).
+
+Logo created by [kostaspap](https://www.linkedin.com/pub/konstantinos-papadopoulos/68/893/509),
+licenced under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
