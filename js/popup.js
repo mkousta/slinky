@@ -7,7 +7,7 @@
   var channelNames = [];
   var groupNames = [];
   var userNames = [];
-  var userIds = [];
+  var selection;
 
   var getChannelsList = function(){
     return $.ajax({
@@ -26,7 +26,7 @@
   var getUsersList = function(){
     return $.ajax({
       url: 'https://slack.com/api/users.list',
-      data: { token: token }
+      data: { token: token, presence: true }
     });
   };
 
@@ -35,20 +35,19 @@
       var i;
       if(channelData[0].ok){
         for(i=0; i<channelData[0].channels.length; i++){
-          channelNames.push('#' + channelData[0].channels[i].name);
+          channelNames.push({value: '#' + channelData[0].channels[i].name, data: channelData[0].channels[i]});
         }
       }
 
       if(groupData[0].ok){
         for(i=0; i<groupData[0].groups.length; i++){
-          groupNames.push(groupData[0].groups[i].name);
+          groupNames.push({value: groupData[0].groups[i].name, data: groupData[0].groups[i]});
         }
       }
 
       if(userData[0].ok){
         for(i=0; i<userData[0].members.length; i++){
-          userNames.push(userData[0].members[i].name);
-          userIds.push(userData[0].members[i].id);
+          userNames.push({value: '@' + userData[0].members[i].name, data: userData[0].members[i]});
         }
       }
       $(document).trigger('gotAutompleteValues');
@@ -85,13 +84,12 @@
 
   var openImAndPost = function(message, recipient){
     var dfd = $.Deferred();
-    var indexOfUser = userNames.indexOf(recipient);
 
-    if(indexOfUser > -1) {
+    if(selection && recipient === selection.value && selection.data.is_channel !== true && selection.data.is_group !== true) {
       $.ajax({
         type: 'POST',
         url: 'https://slack.com/api/im.open',
-        data: { token: token, user: userIds[indexOfUser] },
+        data: { token: token, user: selection.data.id },
         success: function(resp) {
           dfd.resolve(resp);
         },
@@ -190,7 +188,33 @@
         lookup: channelNames.concat(groupNames).concat(userNames),
         minChars: 2,
         appendTo: '.suggestions',
-        lookupLimit: 11
+        lookupLimit: 11,
+        formatResult: function (suggestion, currentValue) {
+          var escapeRegExChars = function (value) {
+            return value.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+          };
+          var pattern = '(' + escapeRegExChars(currentValue) + ')';
+          var userPresenceInfo = '';
+
+          if(suggestion.data.is_channel !== true && suggestion.data.is_group !== true){
+            if(suggestion.data.presence === 'active'){
+              userPresenceInfo = '<i class=\'present\'><\/i>';
+            } else {
+              userPresenceInfo = '<i><\/i>';
+            }
+          }
+
+          return suggestion.value
+            .replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/&lt;(\/?strong)&gt;/g, '<$1>') + userPresenceInfo;
+        },
+        onSelect: function(item){
+          selection = item;
+        }
       });
     });
   };

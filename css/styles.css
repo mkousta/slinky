@@ -121,6 +121,22 @@ a:hover {
   color: #2ab27b;
 }
 
+.autocomplete-suggestion i:after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  float: right;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+}
+
+.autocomplete-suggestion i.present:after {
+  background: #2ab27b;
+  border: 1px solid #2ab27b;
+}
+
 /* Icons */
 @font-face {
   font-family: 'slinky-icons';
