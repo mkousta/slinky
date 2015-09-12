@@ -39,7 +39,7 @@
       sendToTeam(info.pageUrl);
     } else if(info.menuItemId === 'stwt'){
       sendToTeam(info.selectionText);
-    } else if(info.menuItemId === 'siwt' && info.mediaType === "image"){
+    } else if(info.menuItemId === 'siwt' && info.mediaType === 'image'){
       sendToTeam(info.srcUrl);
     }
   };
