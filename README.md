@@ -1,12 +1,12 @@
-# slinky [beta]
+# Slinky [beta]
 Slinky is a simple Google Chrome extension for the popular [Slack](https://slack.com/) application.
-With Slinky you can share with your Slack team links as you browse.
+With Slinky you can share with your Slack team links, images, text as you browse.
 
 ## Main Features
 
 * Share your current tab's url with your team's channel
-* Share links or text from your current tab with your team's channel
-* Share your current tab's url with any channel or group your have access to
+* Share links, text, images from your current tab with your team's channel
+* Share your current tab's url with a user or any channel or group your have access to
 * Add optional message while sharing your current tab's url
 
 ## Installation
@@ -17,4 +17,8 @@ With Slinky you can share with your Slack team links as you browse.
 
 3. Launch the app!
 
-(First launch will prompt you to add a Slack token in your options for authentication. You can find a token [here](https://api.slack.com/web))
+
+## Usage
+
+* First launch will prompt you to add a Slack token in your options for authentication. You can find a token [here](https://api.slack.com/web#authentication)).
+* Then you can share stuff by opening the extention popup or using the extention menu with a right click (this requires having set a default channel in your options).
