@@ -1,9 +1,9 @@
 {
   "name": "Slinky",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "manifest_version": 2,
   "description": "Share browsing with your Slack team",
-  "homepage_url": "https://slack.com/",
+  "homepage_url": "http://mkousta.github.io/slinky/",
   "options_page": "options.html",
   "browser_action": {
     "default_icon": "icons/slnk48.png",
