@@ -1,13 +1,16 @@
 # ![alt text](https://github.com/mkousta/slinky/blob/master/icons/slnk48.png) Slinky [beta]
 Slinky is a simple Google Chrome extension for the popular [Slack](https://slack.com/) application.
-With Slinky you can share with your Slack team links, images, text as you browse.
+With Slinky you can easily share with your Slack team links, images, text as you browse.
+
+Slinky is a project that was created mainly for personal use & for friends, colleagues. It utilizes the API of the famous Slack application but is not created by, affiliated with, or supported by Slack Technologies, Inc.
 
 ## Main Features
 
-* Share your current tab's url with your team's channel
-* Share links, text, images from your current tab with your team's channel
-* Share your current tab's url with a user or any channel or group your have access to
-* Add optional message while sharing your current tab's url
+- Share your current tab with your team's channel
+- Share your current tab with a user or any channel or group your have access to
+- Add optional message while sharing your current tab
+- Menu that helps you share links, text, images from your current tab with your team
+
 
 ## Installation
 

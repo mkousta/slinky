@@ -22,10 +22,6 @@ h1 {
   text-align: center;
   margin-bottom: 0;
 }
-footer ul {
-  width: 80%;
-  display: none;
-}
 
 /* Input Elements */
 input[type=text],
