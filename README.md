@@ -21,6 +21,9 @@ Slinky is a project that was created mainly for personal use & for friends, coll
 3. Launch the app!
 
 
+Slinky is also available through [Chrome Web Store](https://chrome.google.com/webstore/detail/slinky/cngoheiekmkbfbiagoheckdoedncmpjm?hl=en-US&gl=GR&authuser=2)
+
+
 ## Usage
 
 * First launch will prompt you to add a Slack token in your options for authentication. You can find a token [here](https://api.slack.com/web#authentication)).
